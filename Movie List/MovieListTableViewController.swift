@@ -8,7 +8,19 @@
 
 import UIKit
 
-class MovieListTableViewController: UITableViewController {
+class MovieListTableViewController: UITableViewController, MovieTableViewCellDelegate {
+    func seenButtonWasTapped(for cell: MovieTableViewCell) {
+       
+            guard let indexPath = tableView.indexPath(for: cell) else { return }
+            let movie = movieController.movies[indexPath.row]
+            
+            
+            movieController.toggleseen(for: movie)
+            
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+        }
+    }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,18 +32,19 @@ class MovieListTableViewController: UITableViewController {
         return movieController.movies.count
     }
     
-override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath)
     
     guard let movieCell = cell as? MovieTableViewCell else { return cell }
     let movie = movieController.movies[indexPath.row]
     
-   // movieCell.movieLabel.text = movie.title
-    
     movieCell.movie = movie
+
     
 
     return cell
+    }
 }
+    
     let movieController = MovieController()
-}
+

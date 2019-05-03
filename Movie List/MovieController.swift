@@ -21,5 +21,7 @@ class MovieController {
         movies.append(movie)
     }
     
+    func toggle
+    
     var movies: [Movie] = []
 }
