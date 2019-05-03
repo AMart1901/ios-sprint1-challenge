@@ -21,17 +21,11 @@ class MovieTableViewCell: UITableViewCell {
     
     private func updateViews() {
         guard let movie = movie else { return }
-        let seenButtonTitle = movie.isLiked ? "Seen" : "Not Seen"
+        let seenButtonTitle = movie.seen ? "Seen" : "Not Seen"
         seenButton.setTitle(seenButtonTitle, for: .normal)
-        
-        
-        movieLabel.text = movie.text
+        movieLabel.text = movie.title
     }
 
-    
-    
-    @IBOutlet weak var movieLabel: UILabel!
-    
     weak var delegate: MovieTableViewCellDelegate?
     
     var movie: Movie? {
@@ -39,6 +33,8 @@ class MovieTableViewCell: UITableViewCell {
             updateViews()
         }
     }
-
+    
+    @IBOutlet weak var movieLabel: UILabel!
     @IBOutlet weak var seenButton: UIButton!
 }
+

@@ -12,24 +12,18 @@ class AddMovieViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-     
     }
     
     @IBAction func addMovieButtonPressed(_ sender: Any) {
     
         guard let title = moviesTextView.text, !title.isEmpty else { return }
-    
-        MovieController.createMovie(withText: title)
-        
-        theTableView.reloadData()
-        
+        movieController.createMovie(withText: title)
+        navigationController?.popViewController(animated: true)
         moviesTextView.text = ""
     }
     
+    let movieController = MovieController()
     
     @IBOutlet weak var moviesTextView: UITextField!
     
-
-
 }
