@@ -10,41 +10,48 @@ import UIKit
 
 class MovieListTableViewController: UITableViewController, MovieTableViewCellDelegate {
     func seenButtonWasTapped(for cell: MovieTableViewCell) {
-       
+
             guard let indexPath = tableView.indexPath(for: cell) else { return }
             let movie = movieController.movies[indexPath.row]
+
             
-            
-            movieController.toggleseen(for: movie)
-            
+        
             tableView.reloadRows(at: [indexPath], with: .automatic)
-        }
+
+    
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+         tableView.reloadData()
     }
     
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        tableView.reloadData()
-    }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return movieController.movies.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as? MovieTableViewCell else { return UITableViewCell()}
     
-    guard let movieCell = cell as? MovieTableViewCell else { return cell }
     let movie = movieController.movies[indexPath.row]
+        cell.movie = movie
+        cell.delegate = self
     
-    movieCell.movie = movie
-
     
-
+    
     return cell
     }
-}
     
-    let movieController = MovieController()
+    var movieController = MovieController()
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "movieSegue" {
+            guard let destinationVC = segue.destination as? AddMovieViewController else { return }
+            
+            destinationVC.movieController = movieController
+        }
+    }
+}
+
+
 
