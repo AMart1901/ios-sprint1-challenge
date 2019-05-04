@@ -13,8 +13,6 @@ class MovieListTableViewController: UITableViewController, MovieTableViewCellDel
 
             guard let indexPath = tableView.indexPath(for: cell) else { return }
             let movie = movieController.movies[indexPath.row]
-
-            
         
             tableView.reloadRows(at: [indexPath], with: .automatic)
 
