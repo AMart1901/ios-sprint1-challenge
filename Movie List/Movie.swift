@@ -6,14 +6,14 @@
 //  Copyright © 2019 Lambda. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-struct Movie {
-    var title: String
-    var seen: Bool
+class Movie {
+    var movie: String
+    var hasSeen: Bool
     
-    init(title: String, seen: Bool = false) {
-        self.title = title
-        self.seen = seen
+    init(movie: String, hasSeen: Bool = false) {
+        self.movie = movie
+        self.hasSeen = hasSeen
     }
 }

@@ -11,14 +11,18 @@ import Foundation
 class MovieController {
     
     init() {
-        createMovie(withText: "Toy Story")
-        createMovie(withText: "Lion King")
-        createMovie(withText: "Finding Nemo")
+        createMovie(with: "Toy Story")
+        createMovie(with: "Lion King")
+        createMovie(with: "Finding Nemo")
     }
     
-    func createMovie(withText title: String) {
-        let movie = Movie(title: title)
+    func createMovie(with title: String) {
+        let movie = Movie(movie: title)
         movies.append(movie)
+    }
+    
+    func toggleHasSeen(for movie: Movie) {
+        movie.hasSeen = !movie.hasSeen
     }
     
     var movies: [Movie] = []

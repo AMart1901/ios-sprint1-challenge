@@ -10,20 +10,16 @@ import UIKit
 
 class AddMovieViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
     
     @IBAction func addMovieButtonPressed(_ sender: Any) {
     
         guard let title = moviesTextView.text, !title.isEmpty else { return }
-        movieController?.createMovie(withText: title)
+        movieController.createMovie(with: title)
         navigationController?.popViewController(animated: true)
-        moviesTextView.text = ""
     }
     
-    var movieController: MovieController?
-    
     @IBOutlet weak var moviesTextView: UITextField!
+    
+    var movieController: MovieController!
     
 }
